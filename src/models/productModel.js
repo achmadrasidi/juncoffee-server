@@ -167,7 +167,7 @@ const updateProduct = async (body, id, image) => {
   const { name, price, description, stock, delivery_info, category_id } = body;
   try {
     const query =
-      "UPDATE products SET name = COALESCE(NULLIF($1, ''), name), price = COALESCE(NULLIF($2, '')::money, price), description = COALESCE(NULLIF($3, ''), description), stock = COALESCE(NULLIF($4, '')::integer, stock), delivery_info = COALESCE(NULLIF($5, ''), delivery_info),category_id = COALESCE(NULLIF($6, '')::integer, category_id),image = COALESCE(NULLIF($8, ''), image), updated_at = now() WHERE id = $7 RETURNING id,name,price,description,stock,delivery_info,image,to_char(updated_at::timestamp,'Dy DD Mon YYYY HH24:MI') AS updated_at";
+      "UPDATE products SET name = COALESCE(NULLIF($1, ''), name), price = COALESCE(NULLIF($2, '')::integer, price), description = COALESCE(NULLIF($3, ''), description), stock = COALESCE(NULLIF($4, '')::integer, stock), delivery_info = COALESCE(NULLIF($5, ''), delivery_info),category_id = COALESCE(NULLIF($6, '')::integer, category_id),image = COALESCE(NULLIF($8, ''), image), updated_at = now() WHERE id = $7 RETURNING id,name,price,description,stock,delivery_info,image,to_char(updated_at::timestamp,'Dy DD Mon YYYY HH24:MI') AS updated_at";
     const result = await db.query(query, [name, price, description, stock, delivery_info, category_id, id, image]);
     if (!result.rowCount) {
       throw new ErrorHandler({ status: 404, message: "Product Not Found" });
