@@ -15,18 +15,18 @@ redisConn();
 const app = express();
 const PORT = process.env.PORT;
 
-// const originList = ["http://localhost:3000", "https://juncoffee.netlify.app", "::1"];
+const originList = ["http://localhost:3000", "https://juncoffee.netlify.app", "::1"];
 
-// const corsOption = {
-//   origin: (origin, callback) => {
-//     if (originList.includes(origin) || !origin) return callback(null, true);
-//     return callback(new Error("Forbidden Origin"));
-//   },
-//   optionsSuccessStatus: 200,
-//   methods: ["OPTIONS", "GET", "POST", "PATCH", "DELETE"],
-// };
+const corsOption = {
+  origin: (origin, callback) => {
+    if (originList.includes(origin) || !origin) return callback(null, true);
+    return callback(new Error("Forbidden Origin"));
+  },
+  optionsSuccessStatus: 200,
+  methods: ["OPTIONS", "GET", "POST", "PATCH", "DELETE"],
+};
 
-app.use(cors());
+app.use(cors(corsOption));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
