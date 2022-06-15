@@ -107,10 +107,7 @@ const addProduct = async (req, res) => {
     let image = "";
 
     if (file) {
-      image = file.path.replace("public", "").replace(/\\/g, "/");
-      const imageDirCache = image.split("/")[3].split(".")[0];
-      const imageCache = image.split("/")[3];
-      productStorage.setItem(imageDirCache, imageCache);
+      image = file.path;
     }
 
     const { data, message } = await createProduct(req.body, image);
@@ -132,22 +129,7 @@ const editProduct = async (req, res) => {
     const { file } = req;
     let image = "";
     if (file) {
-      image = file.path.replace("public", "").replace(/\\/g, "/");
-      const {
-        data: { image: oldImage },
-      } = await getProductById(req.params.id);
-      if (oldImage) {
-        const route = req.baseUrl;
-        const oldItem = oldImage.split("/")[3].split(".")[0];
-        const oldCache = productStorage.getItem(oldItem);
-        if (oldCache) {
-          fs.unlinkSync(`./public/images${route}/${oldCache}`);
-          productStorage.removeItem(oldItem);
-        }
-      }
-      const imageDirCache = image.split("/")[3].split(".")[0];
-      const imageCache = image.split("/")[3];
-      productStorage.setItem(imageDirCache, imageCache);
+      image = file.path;
     }
 
     const { data, message } = await updateProduct(req.body, req.params.id, image);
@@ -168,14 +150,7 @@ const editProduct = async (req, res) => {
 const deleteProductById = async (req, res) => {
   try {
     const { data, message } = await deleteProduct(req.params.id);
-    const routes = req.baseUrl;
-    const oldImage = data.image;
-    if (oldImage) {
-      const oldItem = oldImage.split("/")[3].split(".")[0];
-      const oldCache = productStorage.getItem(oldItem);
-      if (oldCache) fs.unlinkSync(`./public/images${routes}/${oldCache}`);
-      productStorage.removeItem(oldItem);
-    }
+
     res.status(200).json({
       data,
       message,

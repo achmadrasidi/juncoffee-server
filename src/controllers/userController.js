@@ -146,42 +146,6 @@ const editUser = async (req, res) => {
     });
   }
 };
-// const editUser = async (req, res) => {
-//   try {
-//     const { file } = req;
-//     let image = "";
-
-//     if (file) {
-//       image = file.path.replace("public", "").replace(/\\/g, "/");
-//       const {
-//         data: { image: oldImage },
-//       } = await getUserById(req);
-//       if (oldImage) {
-//         const route = req.baseUrl;
-//         const oldItem = oldImage.split("/")[3].split(".")[0];
-//         const oldCache = userStorage.getItem(oldItem);
-//         if (oldCache) {
-//           fs.unlinkSync(`./public/images${route}/${oldCache}`);
-//           userStorage.removeItem(oldItem);
-//         }
-//       }
-//       const imageDirCache = image.split("/")[3].split(".")[0];
-//       const imageCache = image.split("/")[3];
-//       userStorage.setItem(imageDirCache, imageCache);
-//     }
-//     const { data, message } = await updateUserProfile(req.body, req.userPayload.id, image);
-//     res.status(200).json({
-//       data,
-//       message,
-//     });
-//   } catch (err) {
-//     const { message } = err;
-//     const status = err.status ? err.status : 500;
-//     res.status(status).json({
-//       error: message,
-//     });
-//   }
-// };
 
 const editUserPassword = async (req, res) => {
   try {
@@ -234,16 +198,8 @@ const deleteUserById = async (req, res) => {
   try {
     const { data, message } = await deleteUser(req);
     const path = req.path;
-    const routes = req.baseUrl;
     if (path === "/delete/") {
       removeAccess(req.userPayload.id);
-    }
-    const oldImage = data.image;
-    if (oldImage) {
-      const oldItem = oldImage.split("/")[3].split(".")[0];
-      const oldCache = userStorage.getItem(oldItem);
-      if (oldCache) fs.unlinkSync(`./public/images${routes}/${oldCache}`);
-      userStorage.removeItem(oldItem);
     }
 
     res.status(200).json({
