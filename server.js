@@ -8,6 +8,7 @@ const { dbConn } = require("./src/config/db.js");
 
 const { errorHandling } = require("./src/middleware/errorHandler.js");
 const { redisConn } = require("./src/config/redis");
+const { cloudConfig } = require("./src/config/cloudinary");
 
 dbConn();
 redisConn();
@@ -30,6 +31,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use("*", cloudConfig);
 
 app.use(mainRouter);
 
