@@ -13,7 +13,7 @@ const cloudConfig = (_req, _res, next) => {
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "TEST",
+    folder: "assets",
   },
 });
 
