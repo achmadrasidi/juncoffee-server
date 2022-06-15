@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const logger = require("morgan");
 const path = require("path");
 const cors = require("cors");
 
@@ -27,7 +26,6 @@ const corsOption = {
 };
 
 app.use(cors(corsOption));
-app.use(logger(":method :url :status :res[content-length] - :response-time ms"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
