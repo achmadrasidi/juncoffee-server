@@ -1,0 +1,6 @@
+node_modules
+.env
+notes.txt
+public
+devServer.js
+coffeshop_db.pgsql

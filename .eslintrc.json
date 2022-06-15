@@ -1,0 +1,16 @@
+{
+  "env": {
+    "commonjs": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "semi": ["warning", "always"],
+    "quotes": ["warning", "double"],
+    "no-use-before-define": ["error", { "functions": true, "classes": true, "variables": true }]
+  }
+}
