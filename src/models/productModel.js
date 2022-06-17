@@ -4,7 +4,7 @@ const { ErrorHandler } = require("../middleware/errorHandler.js");
 const getProductById = async (id) => {
   try {
     const query =
-      "SELECT p.id,p.name,p.price,p.description,p.stock,p.delivery_info,image,to_char(p.created_at::timestamp,'Dy DD Mon YYYY HH24:MI') AS created_at,to_char(p.updated_at::timestamp,'Dy DD Mon YYYY HH24:MI') AS updated_at,c.name AS category FROM products p JOIN category c ON p.category_id = c.id WHERE p.id = $1";
+      "SELECT p.id,p.name,p.price,p.description,p.stock,p.delivery_info,image,to_char(p.created_at::timestamp,'Dy DD Mon YYYY HH24:MI') AS created_at,to_char(p.updated_at::timestamp,'Dy DD Mon YYYY HH24:MI') AS updated_at,c.name AS category FROM products p JOIN category c ON p.category_id = c.id WHERE p.id = $1 AND p.on_delete=false";
     const result = await db.query(query, [id]);
     if (!result.rowCount) {
       throw new ErrorHandler({ status: 404, message: "Product Not Found" });
@@ -22,9 +22,9 @@ const getProductByFav = async (query) => {
   try {
     let params = [];
     let sqlQuery =
-      "SELECT count(*) over() as total, id,name,price,description,stock,delivery_info,image,created_at,category from (select product_id AS id,p.name AS name,p.price AS price,p.description AS description,p.stock AS stock,p.delivery_info AS delivery_info,p.image,to_char(p.created_at::timestamp,'Dy DD Mon YYYY HH24:MI') AS created_at, p.created_at AS date,c.name AS category from transaction_items t join products p on t.product_id = p.id join category c on p.category_id = c.id group by t.product_id,p.name,p.price,p.stock,p.description,p.delivery_info,p.image,p.created_at,c.name having count(*) > 6) AS fp";
+      "SELECT count(*) over() as total, id,name,price,description,stock,delivery_info,image,created_at,on_delete,category from (select product_id AS id,p.name AS name,p.price AS price,p.on_delete,p.description AS description,p.stock AS stock,p.delivery_info AS delivery_info,p.image,to_char(p.created_at::timestamp,'Dy DD Mon YYYY HH24:MI') AS created_at, p.created_at AS date,c.name AS category from transaction_items t join products p on t.product_id = p.id join category c on p.category_id = c.id group by t.product_id,p.name,p.price,p.stock,p.description,p.delivery_info,p.image,p.created_at,p.on_delete,c.name having count(*) > 6) AS fp WHERE on_delete=false";
     if (category) {
-      sqlQuery += " WHERE lower(category) = lower($1)";
+      sqlQuery += " AND lower(category) = lower($1)";
       params.push(category);
     }
     if (order) {
@@ -77,14 +77,14 @@ const getProducts = async (query) => {
     let filterQuery = [];
     let params = [];
     let sqlQuery =
-      "SELECT count(*) over() as total,id,name,price,description,stock,delivery_info,image,created_at,updated_at,category FROM (SELECT p.id,p.name,p.price,p.description,p.stock,p.delivery_info,p.image,to_char(p.created_at::timestamp,'Dy DD Mon YYYY HH24:MI') AS created_at,created_at AS date,to_char(p.updated_at,'Dy DD Mon YYYY HH24:MI') AS updated_at,updated_at AS updated_date,c.name AS category FROM products p JOIN category c ON p.category_id = c.id) p ";
+      "SELECT count(*) over() as total,id,name,price,description,stock,delivery_info,image,on_delete,created_at,updated_at,category FROM (SELECT p.id,p.name,p.price,p.description,p.stock,p.delivery_info,p.image,to_char(p.created_at::timestamp,'Dy DD Mon YYYY HH24:MI') AS created_at,created_at AS date,to_char(p.updated_at,'Dy DD Mon YYYY HH24:MI') AS updated_at,updated_at AS updated_date,p.on_delete,c.name AS category FROM products p JOIN category c ON p.category_id = c.id) p WHERE on_delete = false ";
 
     const queryList = ["keyword", "category", "minPrice"];
     const queryFilter = queryProperty.filter((val) => queryList.includes(val));
     const filterLength = queryFilter.length;
 
     if (filterLength) {
-      sqlQuery += " WHERE";
+      sqlQuery += " AND";
       for (const key of queryFilter) {
         switch (key) {
           case "keyword":
@@ -180,7 +180,7 @@ const updateProduct = async (body, id, image) => {
 
 const deleteProduct = async (id) => {
   try {
-    const query = "DELETE FROM products WHERE id = $1 RETURNING id,name,price,description,stock,delivery_info,image";
+    const query = "UPDATE products set on_delete=true WHERE id = $1 RETURNING id,name,price,description,stock,delivery_info,image";
     const result = await db.query(query, [id]);
     if (!result.rowCount) {
       throw new ErrorHandler({ status: 404, message: "Product Not Found" });
