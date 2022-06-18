@@ -17,23 +17,13 @@ const getOrderById = async (id) => {
   }
 };
 
-const findTransaction = async (query) => {
-  const { keyword, delivery_method, order_status, order, sort } = query;
+const findTransaction = async () => {
   try {
-    let parameterize = [];
     let sqlQuery =
-      "SELECT id,user_name,product_name,product_price,shipping_address,quantity,subtotal,delivery_method,shipping_price,tax_price,total_price,created_at,order_status FROM(SELECT t.id,u.name AS user_name,p.name AS product_name,p.price AS product_price,t.shipping_address,t.quantity,t.subtotal,d.method AS delivery_method,t.shipping_price,t.tax_price,t.total_price,to_char(t.created_at::timestamp,'Dy DD Mon YYYY HH24:MI') AS created_at,t.created_at AS date,t.order_status FROM transactions t JOIN users u on t.user_id = u.id JOIN products p on t.product_id = p.id JOIN delivery d on t.delivery_id = d.id) td";
-    if (keyword || delivery_method || order_status) {
-      sqlQuery +=
-        " WHERE lower(order_status) = lower($3) OR lower(user_name) LIKE lower('%' || $1 || '%') OR lower(product_name) LIKE lower('%' || $1 || '%') OR lower(delivery_method) = lower($2) OR lower(order_status) LIKE lower('%' || $1 || '%')";
-      parameterize.push(keyword, delivery_method, order_status);
-    }
-    if (order) {
-      sqlQuery += " order by " + sort + " " + order;
-    }
-    const result = await db.query(sqlQuery, parameterize);
+      "select td.id as item_id,t.user_id,t.id as transaction_id,u.email as user_email,p.name as product_name,p.image as image,td.quantity,size,td.price,t.shipping_address as address,t.total_price as total,t.order_status as status,t.subtotal,t.shipping_price,t.tax_price,t.payment_method from transaction_items td join transactions t on td.transaction_id = t.id join products p on td.product_id=p.id join users u on t.user_id=u.id where transaction_id in(SELECT id FROM transactions WHERE order_status = 'NOT PAID' and on_delete=false)";
+    const result = await db.query(sqlQuery);
     if (result.rowCount === 0) {
-      throw new ErrorHandler({ status: 404, error: "Transaction Not Found" });
+      throw new ErrorHandler({ status: 404, error: "All Order has been PAID" });
     }
     return {
       total: result.rowCount,
@@ -58,7 +48,7 @@ const transactionSummary = async () => {
 };
 
 const createTransaction = async (body, u_id) => {
-  const { user_id, items } = body;
+  const { user_id, items, totalPrice, subtotal, address, payMethod, shipping, tax } = body;
   try {
     let userId = u_id;
     let params = [];
@@ -67,8 +57,8 @@ const createTransaction = async (body, u_id) => {
     const client = await db.connect();
     await client.query("BEGIN");
 
-    const queryOrder = "INSERT INTO transactions(user_id) VALUES($1) RETURNING id";
-    const order = await client.query(queryOrder, [userId]);
+    const queryOrder = "INSERT INTO transactions(user_id,total_price,subtotal,shipping_address,payment_method,shipping_price,tax_price) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING id";
+    const order = await client.query(queryOrder, [userId, totalPrice, subtotal, address, payMethod, shipping, tax]);
     const orderId = order.rows[0].id;
 
     let orderItemQuery = "INSERT INTO transaction_items(product_id,transaction_id,quantity,size,price) VALUES";

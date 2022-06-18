@@ -14,7 +14,7 @@ const getDetailOrder = async (req, res) => {
   }
 };
 
-const findOrderByQueries = async (req, res) => {
+const findOrder = async (req, res) => {
   try {
     const { total, data } = await findTransaction(req.query);
     res.status(200).json({
@@ -90,4 +90,4 @@ const deleteOrderById = async (req, res) => {
   }
 };
 
-module.exports = { getDetailOrder, addTransaction, findOrderByQueries, editTransaction, deleteOrderById, orderSummary };
+module.exports = { getDetailOrder, addTransaction, findOrder, editTransaction, deleteOrderById, orderSummary };

@@ -1,6 +1,6 @@
 const Router = require("express").Router();
 
-const { addTransaction, findOrderByQueries, editTransaction, deleteOrderById, getDetailOrder, orderSummary } = require("../controllers/transactionController.js");
+const { addTransaction, editTransaction, deleteOrderById, getDetailOrder, orderSummary, findOrder } = require("../controllers/transactionController.js");
 
 const { orderValidator } = require("../middleware/fieldValidator.js");
 const { valueValidator } = require("../middleware/valueValidator.js");
@@ -10,7 +10,7 @@ const { checkToken, checkRole } = require("../middleware/authValidator");
 // get transaction details
 Router.get("/detail/:id", checkToken, checkRole("admin"), valueValidator, getDetailOrder);
 // get all transactions or search transactions
-Router.get("/", checkToken, checkRole("admin"), valueValidator, orderValidator, findOrderByQueries);
+Router.get("/", checkToken, checkRole("admin"), valueValidator, orderValidator, findOrder);
 // get transaction summary
 Router.get("/summary", checkToken, checkRole("admin"), orderSummary);
 // add new transaction

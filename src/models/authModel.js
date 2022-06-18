@@ -53,9 +53,9 @@ const getPassByEmail = async (email) => {
 
 const verifyPayment = async (payload) => {
   try {
-    const { t_id, address, totalPrice, subtotal, shipping, tax, payMethod } = payload;
-    let sqlQuery = "UPDATE transactions SET shipping_address = $1, total_price = $2, order_status = 'PAID', subtotal = $3, shipping_price = $4, tax_price = $5, payment_method = $6 WHERE id = $7 RETURNING *  ";
-    const result = await db.query(sqlQuery, [address, totalPrice, subtotal, shipping, tax, payMethod, t_id]);
+    const { t_id } = payload;
+    let sqlQuery = "UPDATE transactions SET order_status = 'PAID', WHERE id = $1 RETURNING *  ";
+    const result = await db.query(sqlQuery, [t_id]);
     if (!result.rowCount) throw new ErrorHandler({ status: 404, message: "Transaction Not Found" });
     return {
       data: result.rows[0],
