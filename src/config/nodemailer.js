@@ -47,7 +47,7 @@ const sendConfirmationPayment = async (name, email, items, totalPrice, payMethod
     <h3>Thank you for shopping at Juncoffee. here is your transaction details:</h3>
     ${items.map((val) => {
       return `<ul><h3>${val.name}</h3> 
-        <img src=https://juncoffee.pagekite.me${val.image}/>
+        <img src=${val.image}/>
         ${val.variant.map((cart) => {
           return `<li>${cart.quantity} pcs</li>
           <li> ${cart.size} </li>
@@ -69,7 +69,7 @@ const sendConfirmationPayment = async (name, email, items, totalPrice, payMethod
       <h3>Thank you for shopping at Juncoffee. here is your transaction details:</h3>
       ${items.map((val) => {
         return `<ul><h3>${val.name}</h3> 
-        <img src=https://juncoffee.pagekite.me${val.image}/>
+        <img src=${val.image}/>
           ${val.variant.map((cart) => {
             return `<li>${cart.quantity} pcs</li>
             <li> ${cart.size} </li>
