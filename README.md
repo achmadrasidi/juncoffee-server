@@ -2,7 +2,7 @@
 
   <h1 align="center">Juncoffee Server</h1>
   <p align="center">
-    <image align="center" width="100" src='../frontend/static/assets/img/coffee 1.png' />
+    <image align="center" width="100" src='../juncoffee-client/static/assets/img/coffee 1.png' />
   </p>
 
   <p align="center">
