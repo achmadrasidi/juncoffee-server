@@ -17,7 +17,7 @@ Router.use("/product", productsRouter);
 Router.use("/promo", promosRouter);
 Router.use("/transaction", transactionsRouter);
 Router.get("*", (_req, res) => {
-  res.json({
+  res.status(404).json({
     message: "Page Not Found",
   });
 });
