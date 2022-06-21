@@ -98,5 +98,5 @@ npm run startDev
 
 ### Related Project
 
-- [`Frontend-coffeshop`](https://github.com/achmadrasidi/juncoffee-client)
-- [`Backend-coffeshop`](https://github.com/achmadrasidi/juncoffee-server)
+- [`Frontend-juncoffee`](https://github.com/achmadrasidi/juncoffee-client)
+- [`Backend-juncoffee`](https://github.com/achmadrasidi/juncoffee-server)
