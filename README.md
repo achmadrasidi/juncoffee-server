@@ -7,7 +7,7 @@
 
   <p align="center">
     <br />
-    <a href="https://juncoffe.netlify.app/">View Demo</a>
+    <a href="https://juncoffe.netlify.app/">View Live Application</a>
     ·
     <a href="https://github.com/achmadrasidi/juncoffee/issues">Report Bug</a>
     ·
@@ -35,6 +35,11 @@ Coffee Shop is a store that sells some good meals, and especially coffee. We pro
 [![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 <br>
 
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+[![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+[![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://reactjs.org/)
+
 ## Getting Started
 
 ### Prerequisites
@@ -48,22 +53,16 @@ Coffee Shop is a store that sells some good meals, and especially coffee. We pro
 1. Clone the repo
 
 ```sh
-git clone https://github.com/achmadrasidi/juncoffee.git
+git clone https://github.com/achmadrasidi/juncoffee-server.git
 ```
 
-2. Go to _server_ directory
-
-```sh
-cd server
-```
-
-3. Install NPM packages
+2. Install NPM packages
 
 ```sh
 npm install
 ```
 
-4. Add .env file at root folder project, and add following
+3. Add .env file at root folder project, and add following
 
 ```sh
 PORT
@@ -72,17 +71,32 @@ DB_HOST
 DB_DATABASE
 DB_PORT
 DB_PASS
+REDIS_CLIENT_URL
 JWT_SECRET_KEY
 JWT_ISSUER
+JWT_SECRET_CONFIRM_KEY
+JWT_SECRET_PAYMENT_KEY
+JWT_SECRET_PASSWORD_KEY
+MAIL_USERNAME
+MAIL_PASSWORD
+OAUTH_CLIENTID
+OAUTH_CLIENT_SECRET
+OAUTH_REFRESH_TOKEN
+CLIENT_URL
+CLOUDINARY_CLOUD
+CLOUDINARY_KEY
+CLOUDINARY_SECRET
 ```
 
-5. Starting application
+4. Starting application
 
 ```sh
 npm run startDev
 ```
 
+5. Juncoffee Server App is Running
+
 ### Related Project
 
-- [`Frontend-coffeshop`](https://github.com/achmadrasidi/juncoffee/tree/main/frontend)
-- [`Backend-coffeshop`](https://github.com/achmadrasidi/juncoffee/tree/main/server)
+- [`Frontend-coffeshop`](https://github.com/achmadrasidi/juncoffee-client)
+- [`Backend-coffeshop`](https://github.com/achmadrasidi/juncoffee-server)
