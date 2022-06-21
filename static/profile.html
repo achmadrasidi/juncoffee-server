@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Juncoffee - Profile | Coffee Shop | Coffee Product " />
+    <title>Juncoffee - Profile</title>
+    <link rel="stylesheet" href="assets/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top bg-white nav-coffee">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="home.html"> <img src="assets/img/coffee 1.png" alt="logo-icon" />&nbsp;Juncoffee</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active profile-nav" aria-current="page" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="product.html">Product</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Your Cart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">History</a>
+            </li>
+          </ul>
+          <div class="profile-right-nav">
+            <a href="#"><img src="assets/img/search.png" width="30" height="30" class="me-3" alt="" /></a>
+            <a href="#"><img src="assets/img/chat (1) 1.png" width="30" height="30" alt="" /></a>
+            <a href="profile.html"><img src="assets/img/profile-user-icon.png" class="ms-3" alt="" /></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <!-- Section User Profile -->
+    <section class="user-profile">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-6">
+            <h2 class="hero-title">User Profile</h2>
+          </div>
+        </div>
+        <div class="row my-4" id="user-contact-res">
+          <div class="col-md-3">
+            <div class="card card-profile-layout " id="card-profile-layout-res">
+              <div class="card-body text-center mt-5">
+                <img src="assets/img/user-profile-image.png" class="user-profile-image" alt="" />
+                <h2 class="card-title mt-3">Zulaikha</h2>
+                <p class="text-center email-text">zulaikha17@gmail.com</p>
+                <p class="product-ordered text-center mt-4">Has been ordered 15 products</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 user-contact-card" id="user-contact-card-res">
+            <div class="card card-profile-layout " id="card-profile-layout-res">
+              <div class="card-body">
+                <div class="row mt-3 ps-3">
+                  <div class="col-md-6">
+                    <h2 class="user-contact">Contacts</h2>
+                  </div>
+                  <div class="col-md-6 text-end">
+                    <img src="assets/img/needle.png" width="10%" alt="" />
+                  </div>
+                </div>
+                <div class="row mt-4 ps-3 gap-5" id="row-email-phone-card">
+                  <div class="col-md-6">
+                    <h2 class="user-contact-title">Email Address :</h2>
+                    <input type="text" class="user-contact-text" value="zulaikha17@gmail.com"></input>
+                  </div>
+                  <div class="col-md-5">
+                    <h2 class="user-contact-title">Mobile number :</h2>
+                    <input type="text" class="user-contact-text" value="(+62)813456782"></input>
+                  </div>
+                </div>
+                <div class="row mt-3 ps-3" id="delivery-res">
+                  <div class="col-md-6">
+                    <h2 class="user-contact-title">Delivery Address :</h2>
+                    <textarea class="user-contact-text">Iskandar Street no. 67 Block A Near
+Bus Stop</textarea>             
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-lg-5 pt-5 " id="user-detail-row-res">
+          <div class="col-md-6 me-5" id="user-detail-col-res">
+            <div class="card card-detail-layout" id="card-detail-layout-res">
+              <div class="card-body">
+                <div class="row mt-3 ps-3">
+                  <div class="col-md-6">
+                    <h2 class="user-contact">Details</h2>
+                  </div>
+                  <div class="col-md-6 text-end">
+                    <img src="assets/img/needle.png" width="11%" alt="" />
+                  </div>
+                </div>
+                <div class="row mt-4 ps-3 card-user-detail-row" id="card-user-detail-res">
+                  <div class="col-md-7 d-flex flex-column gap-2">
+                    <h2 class="user-contact-title">Display Name :</h2>
+                    <input type="text" class="user-contact-text" value="Zulaikha"></input>
+                    <h2 class="user-contact-title">First name :</h2>
+                    <input type="text" class="user-contact-text" value="Zulaikha"></input>
+                    <h2 class="user-contact-title">Last name :</h2>
+                    <input type="text" class="user-contact-text" value="Nirmala"></input>
+                  </div>
+                  <div class="col-md-4 d-flex flex-column date-gender-res gap-2">
+                    <h2 class="user-contact-title">Date Of Birth</h2>
+                    <input type="date" class="user-contact-text" value="1990-04-03"></input>
+                    <div class="radio-row mt-2">
+                      <input type="radio" name="gender" value="male">
+                      <label for="gender" class="male-icon-text ms-2 mb-0"> Male </label>
+                      </div>
+                    <div class="radio-row">
+                        <input type="radio" name="gender" value="female" checked>
+                        <label for="gender"  class="male-icon-text ms-2 mb-0"> Female</label>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 button-user-detail">
+            <h2 class="button-user-text">
+              Do you want to save <br />
+              the change?
+            </h2>
+            <div class="button-content mt-4">
+              <button class="save-change-button">Save Change</button>
+              <button class="cancel-button mt-3">Cancel</button>
+              <button class="edit-pass-button mt-5"><span>Edit Password</span> <img src="assets/img/right-icon.png" alt="" /></button>
+              <button class="logout-button mt-3"  onclick="window.location.href='login.html'"><span>Log out</span> <img src="assets/img/right-icon.png" alt="" /></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Section User Profile -->
+    <!-- Footer -->
+    <footer class="home-footer py-5">
+      <div class="container-fluid mt-5">
+        <div class="row">
+          <div class="col-md-8 footer-brand-layout">
+            <h2 class="footer-brand"><img src="assets/img/coffee 1.png" alt="logo-icon" />&nbsp;Juncoffee</h2>
+            <p class="footer-text mt-3">
+              Juncoffee is a store that sells some good <br />
+              meals, and especially coffee. We provide <br />
+              high quality beans
+            </p>
+            <img src="assets/img/Facebook.png" class="footer-fb-icon" alt="fb-icon" />
+            <img src="assets/img/Twitter-icon.png" class="footer-twitter-icon" alt="twitter-icon" />
+            <img src="assets/img/Instagram.png" class="footer-ig-icon" alt="ig-icon" />
+            <p class="footer-home-copyright">@2022Juncoffee</p>
+          </div>
+          <div class="footer-nav">
+          <div class="col-md-2">
+            <h2 class="link-title">Product</h2>
+            <div class="footer-home-link">
+              <a href="">Download</a>
+              <a href="">Pricing</a>
+              <a href="">Locations</a>
+              <a href="">Countries</a>
+              <a href="">Blog</a>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <h2 class="link-title">Engage</h2>
+            <div class="footer-home-link">
+              <a href="">Coffe Shop ?</a>
+              <a href="">About Us</a>
+              <a href="">FAQ</a>
+              <a href="">Privacy Policy</a>
+              <a href="">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer  -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>
