@@ -26,7 +26,7 @@
 
 ## About The Project
 
-Coffee Shop is a store that sells some good meals, and especially coffee. We provide high quality beans.
+Juncoffee is a store that sells some good meals, and especially coffee. We provide high quality beans.
 
 ### Built With
 
@@ -34,11 +34,6 @@ Coffee Shop is a store that sells some good meals, and especially coffee. We pro
 [![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)](https://expressjs.com/)
 [![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 <br>
-
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-[![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
-[![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://reactjs.org/)
 
 ## Getting Started
 
@@ -53,48 +48,51 @@ Coffee Shop is a store that sells some good meals, and especially coffee. We pro
 1. Clone the repo
 
 ```sh
-git clone https://github.com/achmadrasidi/juncoffee-server.git
+$ git clone https://github.com/achmadrasidi/juncoffee-server.git
 ```
 
 2. Install NPM packages
 
 ```sh
-npm install
+$ npm install
 ```
 
 3. Add .env file at root folder project, and add following
 
 ```sh
-PORT
-DB_USER
-DB_HOST
-DB_DATABASE
-DB_PORT
-DB_PASS
-REDIS_CLIENT_URL
-JWT_SECRET_KEY
-JWT_ISSUER
-JWT_SECRET_CONFIRM_KEY
-JWT_SECRET_PAYMENT_KEY
-JWT_SECRET_PASSWORD_KEY
-MAIL_USERNAME
-MAIL_PASSWORD
-OAUTH_CLIENTID
-OAUTH_CLIENT_SECRET
-OAUTH_REFRESH_TOKEN
-CLIENT_URL
-CLOUDINARY_CLOUD
-CLOUDINARY_KEY
-CLOUDINARY_SECRET
+PORT=*YOUR PORT*
+DB_USER=*YOUR DB_USER*
+DB_HOST=*YOUR DB_HOST*
+DB_DATABASE=*YOUR DB_DATABASE*
+DB_PORT=*YOUR DB_PORT*
+DB_PASS=*YOUR DB_PASS*
+REDIS_CLIENT_URL=*YOUR REDIS_CLIENT_URL*
+JWT_SECRET_KEY=*YOUR JWT_SECRET_KEY*
+JWT_ISSUER=*YOUR JWT_ISSUER*
+JWT_SECRET_CONFIRM_KEY=*YOUR JWT_SECRET_CONFIRM_KEY*
+JWT_SECRET_PAYMENT_KEY=*YOUR JWT_SECRET_PAYMENT_KEY*
+JWT_SECRET_PASSWORD_KEY=*YOUR JWT_SECRET_PASSWORD_KEY*
+MAIL_USERNAME=*YOUR MAIL_USERNAME*
+MAIL_PASSWORD=*YOUR MAIL_PASSWORD*
+OAUTH_CLIENTID=*YOUR OAUTH_CLIENTID*
+OAUTH_CLIENT_SECRET=*YOUR OAUTH_CLIENT_SECRET*
+OAUTH_REFRESH_TOKEN=*YOUR OAUTH_REFRESH_TOKEN*
+CLIENT_URL=*YOUR CLIENT_URL*
 ```
 
-4. Starting application
+4. This app using cloudinary as a file storage
+
+```sh
+CLOUDINARY_URL=cloudinary://564544498788315:ZK3Nfw_bTfpxxNyQ3FheeQF-VmU@dyo0qolq4
+```
+
+5. Starting application
 
 ```sh
 npm run startDev
 ```
 
-5. Juncoffee Server App is Running
+6. Juncoffee Server App is Running
 
 ### Related Project
 
