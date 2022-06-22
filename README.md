@@ -89,7 +89,7 @@ CLOUDINARY_URL=cloudinary://564544498788315:ZK3Nfw_bTfpxxNyQ3FheeQF-VmU@dyo0qolq
 5. Starting application
 
 ```sh
-npm run startDev
+$ npm run startDev
 ```
 
 6. Juncoffee Server App is Running
