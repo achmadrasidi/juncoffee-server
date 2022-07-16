@@ -20,7 +20,7 @@ const sendConfirmationEmail = async (name, email, confirmationCode) => {
       html: `<h2>Juncoffee Email Confirmation</h2>
       <h3>Hi, ${name}</h3>
       <h3>Thank you for register. Please confirm your email by clicking on the following link:</h3>
-      <a href=https://juncoffee-api.herokuapp.com/auth/confirm/${confirmationCode}> Click here to verify</a>
+      <a href=https://juncoffee-api.herokuapp.com//auth/confirm/${confirmationCode}> Click here to verify</a>
       </div>`,
     };
     await transport.sendMail(mailOptions);
@@ -95,6 +95,43 @@ const sendConfirmationPayment = async (name, email, items, totalPrice, payMethod
   }
 };
 
+// const sendPasswordConfirmation = async (name, email) => {
+//   try {
+//     const transport = nodemailer.createTransport({
+//       service: "gmail",
+//       auth: {
+//         type: "OAuth2",
+//         user: process.env.MAIL_USERNAME,
+//         pass: process.env.MAIL_PASSWORD,
+//         clientId: process.env.OAUTH_CLIENTID,
+//         clientSecret: process.env.OAUTH_CLIENT_SECRET,
+//         refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+//       },
+//     });
+//     let html = `<h2>Juncoffee Forgot Password Confirmation</h2>
+//     <h3>Hi, ${name}</h3>
+//     <h3>Here is your account details:</h3>
+//     <ul>
+//     <li>Name: <h3>${name}</h3></li>
+//     <li>Email: <h3>${email}</h3></li>
+//   </ul>
+
+//   <h2> <a href=${process.env.CLIENT_URL}/forgot-password/${email}> Click here to reset your password</a></h2>
+//     </div>`;
+
+//     let mailOptions = {
+//       from: process.env.MAIL_USERNAME,
+//       to: email,
+//       subject: "Forgot Password",
+//       html,
+//     };
+
+//     await transport.sendMail(mailOptions);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
+
 const sendPasswordConfirmation = async (name, email) => {
   try {
     const transport = nodemailer.createTransport({
@@ -115,8 +152,8 @@ const sendPasswordConfirmation = async (name, email) => {
     <li>Name: <h3>${name}</h3></li>
     <li>Email: <h3>${email}</h3></li>
   </ul>
-  
-  <h2> <a href=${process.env.CLIENT_URL}/forgot-password/${email}> Click here to reset your password</a></h2>
+  YOUR OTP CODE: <h1>${confirmCode}</h1> <br>
+  INPUT THIS CODE TO RESET YOUR PASSWORD !
     </div>`;
 
     let mailOptions = {

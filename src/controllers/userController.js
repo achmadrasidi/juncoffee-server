@@ -1,11 +1,10 @@
 const { getUserById, getUsers, createUser, deleteUser, updateUserProfile, updateUserPassword, getUserHistory, deleteAllUserHistory, deleteSingleUserHistory, updateForgotPass } = require("../models/userModel.js");
 const { createTransaction } = require("../models/transactionModel");
 const { removeAccess } = require("../middleware/authValidator");
-const { userStorage } = require("../config/cache");
-const fs = require("fs");
 const { sendConfirmationPayment, sendPasswordConfirmation } = require("../config/nodemailer.js");
 const jwt = require("jsonwebtoken");
 const { client } = require("../config/redis.js");
+const generator = require("generate-password");
 
 const getUserDetail = async (req, res) => {
   try {
@@ -182,13 +181,40 @@ const editForgotPassword = async (req, res) => {
 const forgotPassword = async (req, res) => {
   try {
     const { email } = req.params;
-    await sendPasswordConfirmation(email, email);
-    res.status(200).json({
-      message: "Please check your email for password confirmation",
+    const confirmCode = generator.generate({
+      length: 6,
+      numbers: true,
     });
-  } catch (err) {
-    const { message } = err;
-    res.status(500).json({
+
+    await sendPasswordConfirmation(email, email, confirmCode);
+    await client.set(`forgotpass${email}`, confirmCode);
+    res.status(200).json({
+      message: "Please check your email for your OTP password confirmation",
+    });
+  } catch (error) {
+    const { message, status } = error;
+    res.status(status ? status : 500).json({
+      error: message,
+    });
+  }
+};
+
+const verifyOtp = async (req, res) => {
+  try {
+    const { confirmCode } = req.body;
+    const confirm = await client.get(`forgotpass${email}`);
+    if (confirm !== confirmCode) {
+      res.status(403).json({ error: "Invalid OTP Code !" });
+      return;
+    }
+    await client.del(`forgotpass${email}`);
+
+    res.status(200).json({
+      message: "OTP Code Accepted, Please reset your password",
+    });
+  } catch (error) {
+    const { message, status } = error;
+    res.status(status ? status : 500).json({
       error: message,
     });
   }
@@ -263,4 +289,5 @@ module.exports = {
   deleteSingleHistory,
   forgotPassword,
   editForgotPassword,
+  verifyOtp,
 };

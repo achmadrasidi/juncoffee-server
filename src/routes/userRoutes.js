@@ -1,6 +1,20 @@
 const Router = require("express").Router();
 
-const { getUserDetail, userHistory, editUser, editUserPassword, deleteUserById, searchUsers, addUser, createOrder, deleteAllHistory, deleteSingleHistory, forgotPassword, editForgotPassword } = require("../controllers/userController.js");
+const {
+  getUserDetail,
+  userHistory,
+  editUser,
+  editUserPassword,
+  deleteUserById,
+  searchUsers,
+  addUser,
+  createOrder,
+  deleteAllHistory,
+  deleteSingleHistory,
+  forgotPassword,
+  editForgotPassword,
+  verifyOtp,
+} = require("../controllers/userController.js");
 const { userValidator, orderValidator } = require("../middleware/fieldValidator.js");
 const { valueValidator } = require("../middleware/valueValidator.js");
 const { checkToken, checkRole } = require("../middleware/authValidator.js");
@@ -11,6 +25,8 @@ const uploadFile = require("../middleware/fileUpload.js");
 Router.get("/history/", checkToken, checkRole("user"), userHistory);
 // get user profile
 Router.get("/profile/", checkToken, checkRole("user"), getUserDetail);
+// check otp forgor password
+Router.get("/verify-forgot/", verifyOtp);
 // user forgot password
 Router.get("/forgot-password/:email", forgotPassword);
 //edit user forgot password
