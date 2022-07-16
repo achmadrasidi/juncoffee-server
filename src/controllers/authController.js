@@ -93,10 +93,9 @@ const logout = async (req, res) => {
 const confirmEmail = async (req, res) => {
   try {
     const { email } = req.userPayload;
-    const data = await verifyEmail(email);
+    await verifyEmail(email);
 
-    res.json({
-      data,
+    res.status(200).json({
       message: "Your Email has been verified. Please Login",
     });
   } catch (err) {

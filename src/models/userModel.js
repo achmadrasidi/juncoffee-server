@@ -38,7 +38,7 @@ const getUserById = async (req) => {
 const getUserHistory = async (id) => {
   try {
     let sqlQuery =
-      "select td.id as item_id,t.user_id,t.id as transaction_id,p.name as product_name,p.image as image,td.quantity,size,td.price,t.shipping_address as address,t.total_price as total,t.order_status as status,t.subtotal,t.shipping_price,t.tax_price,t.payment_method from transaction_items td join transactions t on td.transaction_id = t.id join products p on td.product_id=p.id where transaction_id in(SELECT id FROM transactions WHERE user_id = $1 and on_delete=false)";
+      "select t.id,i.url, p.name as name_product, p.price, tp.quantity, t.order_status, t.total_price from transaction_products tp join transactions t on tp.transaction_id  = t.id join products p  on p.id = tp.product_id join images i on p.id = i.product_id join users u on t.users_id = u.id where tp.transaction_id in(select id from transactions where users_id=26)";
     const result = await db.query(sqlQuery, [id]);
     if (!result.rowCount) {
       throw new ErrorHandler({ status: 404, message: "No History Found" });
