@@ -187,7 +187,7 @@ const forgotPassword = async (req, res) => {
     });
 
     await sendPasswordConfirmation(email, email, confirmCode);
-    await client.set(`forgotpass${email}`, confirmCode);
+    await client.set(`forgotpass${confirmCode}`, confirmCode);
     res.status(200).json({
       message: "Please check your email for your OTP password confirmation",
     });
@@ -202,12 +202,12 @@ const forgotPassword = async (req, res) => {
 const verifyOtp = async (req, res) => {
   try {
     const { confirmCode } = req.params;
-    const confirm = await client.get(`forgotpass${email}`);
+    const confirm = await client.get(`forgotpass${confirmCode}`);
     if (confirm !== confirmCode) {
       res.status(403).json({ error: "Invalid OTP Code !" });
       return;
     }
-    await client.del(`forgotpass${email}`);
+    await client.del(`forgotpass${confirmCode}`);
 
     res.status(200).json({
       message: "OTP Code Accepted, Please reset your password",
