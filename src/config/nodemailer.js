@@ -132,7 +132,7 @@ const sendConfirmationPayment = async (name, email, items, totalPrice, payMethod
 //   }
 // };
 
-const sendPasswordConfirmation = async (name, email) => {
+const sendPasswordConfirmation = async (name, email, confirmCode) => {
   try {
     const transport = nodemailer.createTransport({
       service: "gmail",
