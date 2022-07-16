@@ -201,7 +201,7 @@ const forgotPassword = async (req, res) => {
 
 const verifyOtp = async (req, res) => {
   try {
-    const { confirmCode } = req.body;
+    const { confirmCode } = req.params;
     const confirm = await client.get(`forgotpass${email}`);
     if (confirm !== confirmCode) {
       res.status(403).json({ error: "Invalid OTP Code !" });

@@ -26,7 +26,7 @@ Router.get("/history/", checkToken, checkRole("user"), userHistory);
 // get user profile
 Router.get("/profile/", checkToken, checkRole("user"), getUserDetail);
 // check otp forgor password
-Router.get("/verify-forgot/", verifyOtp);
+Router.get("/verify-forgot/:confirmCode", verifyOtp);
 // user forgot password
 Router.get("/forgot-password/:email", forgotPassword);
 //edit user forgot password
