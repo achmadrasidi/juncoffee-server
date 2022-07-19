@@ -61,12 +61,10 @@ const createTransaction = async (body, u_id) => {
     const order = await client.query(queryOrder, [userId, totalPrice, subtotal, address, payMethod, shipping, tax]);
     const orderId = order.rows[0].id;
 
-    let orderItemQuery = "INSERT INTO transaction_items(product_id,transaction_id,quantity,size,price) VALUES";
+    let orderItemQuery = "INSERT INTO transaction_items(product_id,transaction_id,quantity,price) VALUES";
     items.map((val) => {
-      return val.variant.map((cart) => {
-        queryParams.push(`($${params.length + 1},$${params.length + 2},$${params.length + 3},$${params.length + 4},$${params.length + 5})`, ",");
-        params.push(val.id, orderId, cart.quantity, cart.size, cart.prodPrice);
-      });
+      queryParams.push(`($${params.length + 1},$${params.length + 2},$${params.length + 3},$${params.length + 4})`, ",");
+      params.push(val.id, orderId, val.quantity, val.price);
     });
     queryParams.pop();
     orderItemQuery += queryParams.join("");
