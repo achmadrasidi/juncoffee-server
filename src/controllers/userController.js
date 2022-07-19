@@ -5,6 +5,7 @@ const { sendConfirmationPayment, sendPasswordConfirmation } = require("../config
 const jwt = require("jsonwebtoken");
 const { client } = require("../config/redis.js");
 const generator = require("generate-password");
+const { groupByTransaction } = require("../helper/groupByTransaction.js");
 
 const getUserDetail = async (req, res) => {
   try {
@@ -96,9 +97,13 @@ const createOrder = async (req, res) => {
 const userHistory = async (req, res) => {
   try {
     const { total, data } = await getUserHistory(req.userPayload.id);
+    const group = groupByTransaction(data, "transaction_id");
+    const detail = Object.entries(group).map((item) => {
+      return { id: item[0], detail: item[1] };
+    });
     res.status(200).json({
       total,
-      data,
+      data: detail,
     });
   } catch (err) {
     const { message, status } = err;
