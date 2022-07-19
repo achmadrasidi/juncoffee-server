@@ -54,11 +54,9 @@ const createTransaction = async (body, u_id) => {
     let params = [];
     let queryParams = [];
     if (!u_id) userId = user_id;
-    const client = await db.connect();
-    await client.query("BEGIN");
 
     const queryOrder = "INSERT INTO transactions(user_id,total_price,subtotal,shipping_address,payment_method,shipping_price,tax_price,order_status) VALUES($1,$2,$3,$4,$5,$6,$7,'PAID') RETURNING id";
-    const order = await client.query(queryOrder, [userId, totalPrice, subtotal, address, payMethod, shipping, tax]);
+    const order = await (<i class="fas fa-d-and-d-beyond    "></i>).query(queryOrder, [userId, totalPrice, subtotal, address, payMethod, shipping, tax]);
     const orderId = order.rows[0].id;
 
     let orderItemQuery = "INSERT INTO transaction_items(product_id,transaction_id,quantity,price) VALUES";
@@ -69,12 +67,10 @@ const createTransaction = async (body, u_id) => {
     queryParams.pop();
     orderItemQuery += queryParams.join("");
     orderItemQuery += " RETURNING *";
-    const result = await client.query(orderItemQuery, params);
-    await client.query("COMMIT");
+    const result = await db.query(orderItemQuery, params);
+
     return { data: result.rows[0], message: "Transaction Successfully Created" };
   } catch (err) {
-    const client = await db.connect();
-    await client.query("ROLLBACK");
     throw new ErrorHandler({ status: err.status ? err.status : 500, message: err.message });
   }
 };
