@@ -20,7 +20,7 @@ const { storage } = require("../config/cloudinary");
 // });
 
 const limitSize = {
-  fileSize: 2e6,
+  fileSize: 4e6,
 };
 
 // const imageFilter = async (req, file, cb) => {
