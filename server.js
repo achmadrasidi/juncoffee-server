@@ -38,4 +38,4 @@ app.use(mainRouter);
 
 app.use(errorHandling);
 
-app.listen(PORT, console.log(`Server is Running at port ${PORT}`));
+app.listen(PORT, console.log(`Server is Running at port ${PORT}`))

@@ -14,7 +14,7 @@ const userValidator = (req, _res, next) => {
 };
 
 const productValidator = (req, _res, next) => {
-  const rules = ["name", "price", "description", "stock", "category_id"];
+  const rules = ["name", "price", "category_id"];
   const { error, valid } = validatorHelper(req, rules);
   if (!valid) {
     next({ status: 400, message: error });
