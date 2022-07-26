@@ -15,7 +15,7 @@ redisConn();
 const app = express();
 const PORT = process.env.PORT;
 
-const originList = ["http://localhost:3000", "http://localhost:3000", "https://juncoffee.netlify.app", "::1"];
+const originList = ["http://localhost:3000", "https://juncoffee.netlify.app", "::1"];
 
 const corsOption = {
   origin: (origin, callback) => {
