@@ -89,6 +89,20 @@ const updateTransaction = async (id) => {
   }
 };
 
+const updateAllTransaction = async () => {
+  try {
+    const query = "UPDATE transactions SET order_status = 'PAID', updated_at = now()  WHERE order_status = 'NOT PAID' RETURNING id,order_status,to_char(updated_at::timestamp,'Dy DD Mon YYYY HH24:MI') AS updated_at";
+    const result = await db.query(query);
+    if (result.rowCount === 0) {
+      throw new ErrorHandler({ status: 404, message: "transaction Not Found" });
+    }
+
+    return { data: result.rows[0], message: "Transaction Successfully Updated" };
+  } catch (err) {
+    throw new ErrorHandler({ status: err.status ? err.status : 500, message: err.message });
+  }
+};
+
 const deleteTransaction = async (id) => {
   try {
     const query = "DELETE FROM transactions WHERE id = $1 RETURNING id,user_id,product_id,delivery_id,shipping_address,quantity,subtotal,tax_price,shipping_price,total_price,order_status";
@@ -102,4 +116,4 @@ const deleteTransaction = async (id) => {
   }
 };
 
-module.exports = { getOrderById, createTransaction, findTransaction, updateTransaction, deleteTransaction, transactionSummary };
+module.exports = { getOrderById, createTransaction, findTransaction, updateTransaction, deleteTransaction, transactionSummary, updateAllTransaction };

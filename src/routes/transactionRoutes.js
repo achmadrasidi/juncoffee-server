@@ -1,6 +1,6 @@
 const Router = require("express").Router();
 
-const { addTransaction, editTransaction, deleteOrderById, getDetailOrder, orderSummary, findOrder } = require("../controllers/transactionController.js");
+const { addTransaction, editTransaction, deleteOrderById, getDetailOrder, orderSummary, findOrder, editAllTransaction } = require("../controllers/transactionController.js");
 
 const { orderValidator } = require("../middleware/fieldValidator.js");
 const { valueValidator } = require("../middleware/valueValidator.js");
@@ -17,6 +17,8 @@ Router.get("/summary", checkToken, checkRole("admin"), orderSummary);
 Router.post("/", checkToken, checkRole("admin"), valueValidator, orderValidator, addTransaction);
 // update order status
 Router.patch("/:id", checkToken, checkRole("admin"), valueValidator, orderValidator, editTransaction);
+// update all order status
+Router.put("/", checkToken, checkRole("admin"), editAllTransaction);
 // delete transaction
 Router.delete("/:id", checkToken, checkRole("admin"), valueValidator, deleteOrderById);
 
