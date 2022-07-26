@@ -36,7 +36,7 @@ const findTransaction = async () => {
 
 const transactionSummary = async () => {
   try {
-    let sqlQuery = "SELECT date(created_at) AS order_date, SUM(total_price) rev FROM transactions t where date_part('day',created_at) between date_part('day',now())-6 and date_part('day',now()) GROUP by date(created_at)";
+    let sqlQuery = "SELECT date(created_at) AS order_date, SUM(total_price) rev FROM transactions t where t.order_status  = 'PAID' and  date(t.created_at)  > current_date - interval '7 days' GROUP by date(created_at)";
     const result = await db.query(sqlQuery);
     if (!result.rowCount) throw new ErrorHandler({ status: 404, message: "Transaction Not Found" });
     return {
