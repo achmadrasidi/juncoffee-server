@@ -15,10 +15,10 @@ Router.get("/", checkToken, checkRole("admin"), valueValidator, orderValidator, 
 Router.get("/summary", checkToken, checkRole("admin"), orderSummary);
 // add new transaction
 Router.post("/", checkToken, checkRole("admin"), valueValidator, orderValidator, addTransaction);
-// update order status
-Router.patch("/:id", checkToken, checkRole("admin"), valueValidator, orderValidator, editTransaction);
 // update all order status
 Router.put("/", checkToken, checkRole("admin"), editAllTransaction);
+// update order status
+Router.patch("/:id", checkToken, checkRole("admin"), valueValidator, orderValidator, editTransaction);
 // delete transaction
 Router.delete("/:id", checkToken, checkRole("admin"), valueValidator, deleteOrderById);
 
