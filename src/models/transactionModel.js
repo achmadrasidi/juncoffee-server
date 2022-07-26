@@ -55,7 +55,7 @@ const createTransaction = async (body, u_id) => {
     let queryParams = [];
     if (!u_id) userId = user_id;
 
-    const queryOrder = "INSERT INTO transactions(user_id,total_price,subtotal,shipping_address,payment_method,shipping_price,tax_price,order_status) VALUES($1,$2,$3,$4,$5,$6,$7,'PAID') RETURNING id";
+    const queryOrder = "INSERT INTO transactions(user_id,total_price,subtotal,shipping_address,payment_method,shipping_price,tax_price) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING id";
     const order = await db.query(queryOrder, [userId, totalPrice, subtotal, address, payMethod, shipping, tax]);
     const orderId = order.rows[0].id;
 
