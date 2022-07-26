@@ -14,7 +14,7 @@ const getDetailOrder = async (req, res) => {
   }
 };
 
-const findOrder = async (req, res) => {
+const findOrder = async (_req, res) => {
   try {
     const { total, data } = await findTransaction();
     const group = groupByTransaction(data, "transaction_id");
@@ -26,7 +26,7 @@ const findOrder = async (req, res) => {
       data: detail,
     });
   } catch (err) {
-    const { message, status } = err;
+    const { message, status = 500 } = err;
     res.status(status).json({
       error: message,
     });
