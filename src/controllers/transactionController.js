@@ -16,10 +16,14 @@ const getDetailOrder = async (req, res) => {
 
 const findOrder = async (req, res) => {
   try {
-    const { total, data } = await findTransaction(req.query);
+    const { total, data } = await findTransaction();
+    const group = groupByTransaction(data, "transaction_id");
+    const detail = Object.entries(group).map((item) => {
+      return { id: item[0], detail: item[1] };
+    });
     res.status(200).json({
       total,
-      data,
+      data: detail,
     });
   } catch (err) {
     const { message, status } = err;
